@@ -11,8 +11,26 @@
   <link rel="icon" href="https://ap-south-1.graphassets.com/clz6ji1z50p3g07ppegum4fc2/cmp5hdd1w0ehz08pk5e2l7iu8" type="image/png" sizes="32x32" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Urbanist:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <!-- Non-blocking CSS: avoids render-blocking on fonts.googleapis.com + first-party stylesheet (LCP / critical path). -->
+  <link
+    rel="preload"
+    href="styles.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <link
+    rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Urbanist:wght@500;700&display=swap"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Urbanist:wght@500;700&display=swap"
+    />
+  </noscript>
 </head>
 <body>
   <nav class="main-nav" id="mainNav" aria-label="Primary">
@@ -1398,6 +1416,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
