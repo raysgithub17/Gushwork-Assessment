@@ -46,7 +46,19 @@ function updateScrollHeader() {
   }
 
   scrollHeader.classList.toggle("is-visible", show);
-  scrollHeader.setAttribute("aria-hidden", String(!show));
+  // Avoid aria-hidden on a container with focusable children (Lighthouse). Prefer inert when supported.
+  const quoteBtn = scrollHeader.querySelector(".js-open-quote-callback-modal");
+  if ("inert" in scrollHeader) {
+    scrollHeader.inert = !show;
+    scrollHeader.removeAttribute("aria-hidden");
+    if (quoteBtn) quoteBtn.removeAttribute("tabindex");
+  } else {
+    scrollHeader.setAttribute("aria-hidden", String(!show));
+    if (quoteBtn) {
+      if (show) quoteBtn.removeAttribute("tabindex");
+      else quoteBtn.setAttribute("tabindex", "-1");
+    }
+  }
   syncScrollHeaderOffset();
   scheduleScrollHeaderOffsetSync();
 }

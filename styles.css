@@ -3793,7 +3793,9 @@ main {
 
 .faq-icon {
   width: 20px;
-  height: 20px;
+  height: auto;
+  aspect-ratio: 12 / 7;
+  object-fit: contain;
   border: none;
   outline: none;
   transition: transform 0.3s ease;
